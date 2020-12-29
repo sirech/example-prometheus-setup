@@ -17,3 +17,17 @@ scrape_configs:
     static_configs:
       - targets:
           - cadvisor:8080
+
+  - job_name: cookery
+    metrics_path: "/actuator/prometheus"
+
+    static_configs:
+      - targets:
+          - cookery:4003
+
+  - job_name: echo
+    metrics_path: "/actuator/prometheus"
+
+    static_configs:
+      - targets:
+          - echo:4000

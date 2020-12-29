@@ -24,3 +24,17 @@ services:
       - "/var/run:/var/run:rw"
       - "/sys:/sys:ro"
       - "/var/lib/docker:/var/lib/docker:ro"
+
+  cookery:
+    container_name: cookery
+    image: quay.io/sirech/cookery2-backend
+
+    ports:
+      - "4003:4003"
+
+  echo:
+    container_name: echo
+    image: quay.io/sirech/echo
+
+    ports:
+      - "4000:4000"

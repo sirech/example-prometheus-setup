@@ -22,6 +22,9 @@ Prometheus scrapes itself
 
 Scrapes data about running containers. Such as `container_cpu_usage_seconds_total`.
 
+- different jvm based applications ([cookery2](https://github.com/sirech/cookery2-backend), [echo](https://github.com/sirech/echo))
+
+Scrapes metrics provided by the application or the jvm, such as `jvm_threads_states_threads`.
 
 ## Prometheus UI
 
