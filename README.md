@@ -12,9 +12,15 @@ docker-compose up
 
 ## Metrics scraped
 
-There are a bunch of typical metrics being scraped, including
+There are a bunch of sources configured:
 
-- **prometheus** itself
+- **prometheus** 
+
+Prometheus scrapes itself
+
+- [**cadvisor**](https://github.com/google/cadvisor)
+
+Scrapes data about running containers. Such as `container_cpu_usage_seconds_total`.
 
 
 ## Prometheus UI
