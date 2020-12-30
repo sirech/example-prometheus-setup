@@ -11,6 +11,15 @@ scrape_configs:
     static_configs:
       - targets:
           - localhost:9090
+
+    relabel_configs:
+      - target_label: instance
+        replacement: prometheus
+
+  - job_name: blackbox-exporter
+
+    static_configs:
+      - targets:
           - blackbox-exporter:9115
 
   - job_name: cadvisor
@@ -36,16 +45,16 @@ scrape_configs:
       - target_label: __address__
         replacement: blackbox-exporter:9115  # The blackbox exporter's real hostname:port.
 
-  - job_name: cookery
-    metrics_path: "/actuator/prometheus"
+  - job_name: applications
+    metrics_path: /actuator/prometheus
 
     static_configs:
       - targets:
           - cookery:4003
-
-  - job_name: echo
-    metrics_path: "/actuator/prometheus"
-
-    static_configs:
-      - targets:
           - echo:4000
+
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        regex: '([^:]+)(:[0-9]+)?'
+        replacement: '${1}'
