@@ -45,3 +45,7 @@ A rate incorporating requests sent by prometheus, and a second one aggregated:
 Aggregated heap consumption for JVM applications
 
 [sum by(instance)(sum_over_time(jvm_memory_used_bytes{area="heap"}[1h]))](http://localhost:9090/graph?g0.expr=sum%20by(instance)(sum_over_time(jvm_memory_used_bytes%7Barea%3D%22heap%22%7D%5B1h%5D))&g0.tab=0&g0.stacked=0&g0.range_input=1h)
+
+## Grafana
+
+The grafana instance comes with some dashboards preinstalled as a starting point.

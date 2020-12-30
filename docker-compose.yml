@@ -46,7 +46,6 @@ services:
     volumes:
       - ./grafana:/etc/grafana/provisioning
 
-
   cookery:
     container_name: cookery
     image: quay.io/sirech/cookery2-backend
