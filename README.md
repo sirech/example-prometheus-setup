@@ -14,6 +14,11 @@ You can access the different components:
 
 - [prometheus](http://localhost:9090)
 - [grafana](http://localhost:3000) (user: root / pwd: root)
+- [node-exporter](http://localhost:9100)
+- [cadvisor](http://localhost:8080)
+- [blackbox-exporter](http://localhost:9115)
+
+**NOTE:** that this setup is not production ready. There is no network distinction and all services are exposed.
 
 ## Metrics scraped
 
@@ -22,6 +27,10 @@ There are a bunch of sources configured:
 - **prometheus** 
 
 Prometheus scrapes itself
+
+- [**node-exporter**](https://github.com/prometheus/node_exporter)
+
+Scrapes data about the underlying host. Such as `node_cpu_seconds_total`.
 
 - [**cadvisor**](https://github.com/google/cadvisor)
 

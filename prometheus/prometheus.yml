@@ -18,6 +18,12 @@ scrape_configs:
         replacement: prometheus
 
   # Scrape blackbox exporter and cadvisor in a different block, so that they don't grouped for prometheus-specific dashboards
+  - job_name: node-exporter
+
+    static_configs:
+      - targets:
+          - node-exporter:9100
+
   - job_name: blackbox-exporter
 
     static_configs:
