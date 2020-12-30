@@ -12,10 +12,12 @@ scrape_configs:
       - targets:
           - localhost:9090
 
+    # Use a more meaningful name than localhost
     relabel_configs:
       - target_label: instance
         replacement: prometheus
 
+  # Scrape blackbox exporter and cadvisor in a different block, so that they don't grouped for prometheus-specific dashboards
   - job_name: blackbox-exporter
 
     static_configs:
@@ -28,6 +30,7 @@ scrape_configs:
       - targets:
           - cadvisor:8080
 
+  # Check for a list of specific URLs
   - job_name: blackbox
     metrics_path: /probe
     params:
@@ -45,6 +48,7 @@ scrape_configs:
       - target_label: __address__
         replacement: blackbox-exporter:9115  # The blackbox exporter's real hostname:port.
 
+  # Scrape JVM based applications
   - job_name: applications
     metrics_path: /actuator/prometheus
 
@@ -53,6 +57,7 @@ scrape_configs:
           - cookery:4003
           - echo:4000
 
+    # Take the port out of the instance name for readability
     relabel_configs:
       - source_labels: [__address__]
         target_label: instance
