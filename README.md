@@ -24,7 +24,7 @@ Scrapes data about running containers. Such as `container_cpu_usage_seconds_tota
 
 - [**black box exporter**](https://github.com/prometheus/blackbox_exporter/)
 
-Checks whether a list of defined target urls is online or not, sort of like a homegrown [freshping](https://www.freshworks.com/website-monitoring/).
+Checks whether a list of defined target urls is online or not, sort of like a homegrown [freshping](https://www.freshworks.com/website-monitoring/). Note that the actual targets are verified by the `probe_success` metric.
 
 - different jvm based applications ([cookery2](https://github.com/sirech/cookery2-backend), [echo](https://github.com/sirech/echo))
 
