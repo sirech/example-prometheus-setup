@@ -31,6 +31,22 @@ services:
     ports:
       - "9115:9115"
 
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+
+    environment:
+      - GF_SECURITY_ADMIN_USER=root
+      - GF_SECURITY_ADMIN_PASSWORD=root
+      - GF_USERS_ALLOW_SIGN_UP=false
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - ./grafana:/etc/grafana/provisioning
+
+
   cookery:
     container_name: cookery
     image: quay.io/sirech/cookery2-backend

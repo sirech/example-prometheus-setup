@@ -10,6 +10,11 @@ This is a sample setup of [prometheus](https://prometheus.io/). It can be used t
 docker-compose up
 ```
 
+You can access the different components:
+
+- [prometheus](http://localhost:9090)
+- [grafana](http://localhost:3000) (user: root / pwd: root)
+
 ## Metrics scraped
 
 There are a bunch of sources configured:
@@ -30,9 +35,7 @@ Checks whether a list of defined target urls is online or not, sort of like a ho
 
 Scrapes metrics provided by the application or the jvm, such as `jvm_threads_states_threads`.
 
-## Prometheus UI
-
-The UI of prometheus can be accessed through http://localhost:9090.
+## Sample metrics
 
 A rate incorporating requests sent by prometheus, and a second one aggregated:
 
