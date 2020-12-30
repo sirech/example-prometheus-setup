@@ -38,3 +38,7 @@ A rate incorporating requests sent by prometheus, and a second one aggregated:
 
 - [rate(prometheus_http_requests_total{code="200", job="prometheus"}[5m])](http://localhost:9090/graph?g0.expr=rate(prometheus_http_requests_total%7Bcode%3D%22200%22%2C%20job%3D%22prometheus%22%7D%5B5m%5D)&g0.tab=1&g0.stacked=0&g0.range_input=15m)
 - [sum(rate(prometheus_http_requests_total{code="200", job="prometheus"}[5m]))](http://localhost:9090/graph?g0.expr=sum(rate(prometheus_http_requests_total%7Bcode%3D%22200%22%2C%20job%3D%22prometheus%22%7D%5B5m%5D))&g0.tab=1&g0.stacked=0&g0.range_input=15m)
+
+Aggregated heap consumption for JVM applications
+
+[sum by(instance)(sum_over_time(jvm_memory_used_bytes{area="heap"}[1h]))](http://localhost:9090/graph?g0.expr=sum%20by(instance)(sum_over_time(jvm_memory_used_bytes%7Barea%3D%22heap%22%7D%5B1h%5D))&g0.tab=0&g0.stacked=0&g0.range_input=1h)
