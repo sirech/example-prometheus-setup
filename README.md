@@ -14,11 +14,12 @@ You can access the different components:
 
 - [prometheus](http://localhost:9090)
 - [grafana](http://localhost:3000) (user: root / pwd: root)
+- [alert-manager](http://localhost:9093)
 - [node-exporter](http://localhost:9100)
 - [cadvisor](http://localhost:8080)
 - [blackbox-exporter](http://localhost:9115)
 
-**NOTE:** that this setup is not production ready. There is no network distinction and all services are exposed.
+**NOTE:** This setup is not production ready. There is no network distinction and all services are exposed.
 
 ## Metrics scraped
 
@@ -27,6 +28,10 @@ There are a bunch of sources configured:
 - **prometheus** 
 
 Prometheus scrapes itself
+
+- [**alert-manager**](https://prometheus.io/docs/alerting/latest/alertmanager/)
+
+Scrapes data about generated alerts. Such as `alertmanager_alerts`.
 
 - [**node-exporter**](https://github.com/prometheus/node_exporter)
 

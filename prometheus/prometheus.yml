@@ -17,24 +17,26 @@ scrape_configs:
       - target_label: instance
         replacement: prometheus
 
-  # Scrape blackbox exporter and cadvisor in a different block, so that they don't grouped for prometheus-specific dashboards
+  # Scrape all the monitoring components in different blocks, so that they don't grouped for prometheus-specific dashboards
   - job_name: node-exporter
-
     static_configs:
       - targets:
           - node-exporter:9100
 
   - job_name: blackbox-exporter
-
     static_configs:
       - targets:
           - blackbox-exporter:9115
 
   - job_name: cadvisor
-
     static_configs:
       - targets:
           - cadvisor:8080
+
+  - job_name: alert-manager
+    static_configs:
+      - targets:
+          - alert-manager:9093
 
   # Check for a list of specific URLs
   - job_name: blackbox
@@ -69,3 +71,10 @@ scrape_configs:
         target_label: instance
         regex: '([^:]+)(:[0-9]+)?'
         replacement: '${1}'
+
+# Set up alert manager
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - alert-manager:9093

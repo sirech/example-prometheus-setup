@@ -62,7 +62,14 @@ services:
       - "3000:3000"
 
     volumes:
-      - ./grafana:/etc/grafana/provisioning
+      - "./grafana:/etc/grafana/provisioning"
+
+  alert-manager:
+    container_name: alert-manager
+    image: prom/alertmanager
+
+    ports:
+      - "9093:9093"
 
   cookery:
     container_name: cookery
