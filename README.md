@@ -68,6 +68,18 @@ Aggregated heap consumption for JVM applications
 
 [sum by(instance)(sum_over_time(jvm_memory_used_bytes{area="heap"}[1h]))](http://localhost:9090/graph?g0.expr=sum%20by(instance)(sum_over_time(jvm_memory_used_bytes%7Barea%3D%22heap%22%7D%5B1h%5D))&g0.tab=0&g0.stacked=0&g0.range_input=1h)
 
+Probes set up by the blackbox exporter that are failing
+
+[probe_success == 0](http://localhost:9090/graph?g0.expr=probe_success%20%3D%3D%200&g0.tab=1&g0.stacked=0&g0.range_input=1h)
+
 ## Grafana
 
 The grafana instance comes with some dashboards preinstalled as a starting point.
+
+## Alert Manager
+
+The alert manager comes preconfigured with a bunch of alerts. You can simulate a failure that will trigger an alert by doing
+
+```
+docker-compose stop echo
+```

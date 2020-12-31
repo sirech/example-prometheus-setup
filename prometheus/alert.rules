@@ -1,0 +1,48 @@
+# -*- mode: yaml-*-
+groups:
+  - name: scraping
+    rules:
+      # check that any defined job is down. Works for jobs that only have one target, like prometheus, but also for applications that define multiple different instances (cookery, echo)
+      - alert: TargetDown
+        expr: >-
+          up{job != "blackbox"} == 0
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          title: Container {{ $labels.instance }} is down
+          description: Failed to scrape job[{{ $labels.job }}] for instance[{{ $labels.instance }}].
+
+  - name: blackbox
+    rules:
+      # blackbox probes cannot be checked by the _up_ metric, so we have an explicit alert for those
+      - alert: ProbeDown
+        expr: >-
+          probe_success == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          title: "Path[{{ $labels.instance }}] is down"
+
+  - name: applications
+    rules:
+      # Provide heap% as a metric to be used by alarms in this group
+      - record: applications:heap:percent
+        expr: >-
+          sum by (instance) (jvm_memory_used_bytes{area="heap"}) * 100 /
+          sum by (instance) (jvm_memory_max_bytes{area="heap"})
+
+      - alert: HighHeapUsage
+        expr: applications:heap:percent > 80
+        labels:
+          severity: warning
+        annotations:
+          title: Application {{ $labels.instance }} heap percentage is at {{ printf "%.2f" $value }}%
+
+      - alert: CriticalHeapUsage
+        expr: applications:heap:percent > 95
+        labels:
+          severity: critical
+        annotations:
+          title: Application {{ $labels.instance }} heap percentage is at {{ printf "%.2f" $value }}%
