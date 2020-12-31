@@ -21,6 +21,14 @@ You can access the different components:
 
 **NOTE:** This setup is not production ready. There is no network distinction and all services are exposed.
 
+### Restarting prometheus
+
+When changing the configuration, you can restart prometheus through this command
+
+```
+curl -X POST http://localhost:9090/-/reload
+```
+
 ## Metrics scraped
 
 There are a bunch of sources configured:
