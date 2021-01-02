@@ -6,7 +6,7 @@ groups:
       - alert: TargetDown
         expr: >-
           up{job != "blackbox"} == 0
-        for: 30s
+        for: 20s
         labels:
           severity: warning
         annotations:
@@ -19,7 +19,7 @@ groups:
       - alert: ProbeDown
         expr: >-
           probe_success == 0
-        for: 30s
+        for: 20s
         labels:
           severity: critical
         annotations:
