@@ -1,6 +1,6 @@
 # Example Prometheus
 
-This is a sample setup of [prometheus](https://prometheus.io/). It can be used to test all the typical functionalities provided by it.
+This is a sample setup of [prometheus](https://prometheus.io/). It can be used to test all the typical functionalities provided by it. It is inspired by [this repository](https://github.com/stefanprodan/dockprom).
 
 ## Running it
 
