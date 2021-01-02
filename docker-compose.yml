@@ -76,6 +76,20 @@ services:
     ports:
       - "9093:9093"
 
+    volumes:
+      - "./alertmanager:/etc/alertmanager"
+
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--web.external-url=http://localhost:9093'
+
+  receiver:
+    container_name: receiver
+    build: receiver
+
+    ports:
+      - "2021:2021"
+
   cookery:
     container_name: cookery
     image: quay.io/sirech/cookery2-backend

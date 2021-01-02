@@ -7,7 +7,7 @@ This is a sample setup of [prometheus](https://prometheus.io/). It can be used t
 [docker-compose](https://docs.docker.com/compose/) is enough to run everything, simply by doing:
 
 ```
-docker-compose up
+docker-compose up --build
 ```
 
 You can access the different components:
@@ -24,6 +24,12 @@ You can access the different components:
 ### Restarting prometheus
 
 When changing the configuration, you can restart prometheus through this command
+
+```
+curl -X POST http://localhost:9090/-/reload
+```
+
+Similarly, for the alert-manager:
 
 ```
 curl -X POST http://localhost:9090/-/reload
@@ -59,6 +65,10 @@ Scrapes metrics provided by the application or the jvm, such as `jvm_threads_sta
 
 ## Sample metrics
 
+The number of samples ingested by prometheus per second:
+
+- [rate(prometheus_tsdb_head_samples_appended_total[5m])](http://localhost:9090/graph?g0.expr=rate(prometheus_tsdb_head_samples_appended_total%5B5m%5D)&g0.tab=1&g0.stacked=0&g0.range_input=1h)
+
 A rate incorporating requests sent by prometheus, and a second one aggregated:
 
 - [rate(prometheus_http_requests_total{code="200", job="prometheus"}[5m])](http://localhost:9090/graph?g0.expr=rate(prometheus_http_requests_total%7Bcode%3D%22200%22%2C%20job%3D%22prometheus%22%7D%5B5m%5D)&g0.tab=1&g0.stacked=0&g0.range_input=15m)
@@ -82,4 +92,10 @@ The alert manager comes preconfigured with a bunch of alerts. You can simulate a
 
 ```
 docker-compose stop echo
+```
+
+Critical alerts are sent to a custom [receiver](./receiver). To see the alerts, you can check its logs:
+
+```
+docker logs receiver
 ```

@@ -1,0 +1,19 @@
+receivers:
+  - name: "null"
+  - name: log
+    webhook_configs:
+      - url: http://receiver:2021
+
+route:
+  group_by:
+    - severity
+  receiver: "null"
+  routes:
+    # Ignore warnings
+    - match:
+        severity: warning
+      receiver: "null"
+    # Route critical alerts to log receiver
+    - match:
+        severity: critical
+      receiver: log
